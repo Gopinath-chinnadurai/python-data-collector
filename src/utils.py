@@ -10,7 +10,7 @@ def request_with_retry(url, headers=None, params=None, max_retries=3):
     Makes an HTTP GET request with retry logic and exponential backoff.
     """
 
-    delay = 1  # initial delay in seconds
+    delay = 1  
 
     for attempt in range(1, max_retries + 1):
         try:
@@ -23,7 +23,6 @@ def request_with_retry(url, headers=None, params=None, max_retries=3):
                 timeout=10
             )
 
-            # Raise exception for HTTP errors (4xx, 5xx)
             response.raise_for_status()
 
             return response
@@ -37,4 +36,4 @@ def request_with_retry(url, headers=None, params=None, max_retries=3):
 
             logger.info(f"Retrying in {delay} seconds...")
             time.sleep(delay)
-            delay *= 2  # exponential backoff
+            delay *= 2  

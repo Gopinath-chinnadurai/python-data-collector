@@ -16,17 +16,14 @@ def main():
     logging.info("Starting data collection process...")
     failures = 0
 
-    # Collect quotes
     quotes = scrape_quotes()
     if not quotes:
         failures += 1
 
-    # Collect GitHub repos
     github_repos = fetch_github_repos()
     if not github_repos:
         failures += 1
 
-    # Build final structured output
     result = {
         "quotes": quotes,
         "github_repos": github_repos,
@@ -38,7 +35,6 @@ def main():
         }
     }
 
-    # Write JSON output
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2)
 

@@ -16,7 +16,6 @@ def fetch_github_repos():
         "Accept": "application/vnd.github+json"
     }
 
-    # Add token if available
     if GITHUB_TOKEN:
         headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
@@ -44,7 +43,6 @@ def fetch_github_repos():
         data = response.json()
         items = data.get("items", [])
 
-        # Stop pagination if no results
         if not items:
             logger.info("No more repositories found.")
             break
@@ -59,7 +57,6 @@ def fetch_github_repos():
 
         page += 1
 
-        # Limit to first 3 pages to avoid excessive API usage
         if page > 3:
             logger.info("Stopping after 3 pages (safe API usage).")
             break
